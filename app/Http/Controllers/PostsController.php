@@ -38,6 +38,8 @@ class PostsController extends Controller
         foreach ($postsArray as $post) {
             Post::create($post);
         }
+
+        dump('posts created');
     }
 
     public function update() {
@@ -50,5 +52,29 @@ class PostsController extends Controller
         ];
 
         Post::where('id', 1)->update($updatedPost);
+
+        dump('post updated');
+    }
+    
+    public function delete() {
+        $post = Post::find(2);
+        if ($post) {
+            dump('post deleted');
+            $post->delete();
+        } else {
+            dump('post already deleted');
+        }
+
+    }
+
+    public function restore() {
+        $post = Post::withTrashed()->find(2);
+        if ($post->deleted_at) {
+            $post->restore();
+            dump('post restored');
+        } else {
+            dump('nothing to restore');
+        }
+
     }
 }

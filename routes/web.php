@@ -15,10 +15,10 @@ Route::get('/about', [AboutController::class, 'index']);
 Route::get('/products', [ProductsController::class, 'index']);
 
 Route::get('/posts', [PostsController::class, 'index']);
-
 Route::get('/posts/create', [PostsController::class, 'create']);
-
 Route::get('/posts/update', [PostsController::class, 'update']);
+Route::get('/posts/delete', [PostsController::class, 'delete']);
+Route::get('/posts/restore', [PostsController::class, 'restore']);
 
 Route::get('/features', [FeaturesController::class, 'index']);
 
