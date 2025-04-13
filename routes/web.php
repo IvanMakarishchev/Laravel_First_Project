@@ -19,6 +19,8 @@ Route::get('/posts/create', [PostsController::class, 'create']);
 Route::get('/posts/update', [PostsController::class, 'update']);
 Route::get('/posts/delete', [PostsController::class, 'delete']);
 Route::get('/posts/restore', [PostsController::class, 'restore']);
+Route::get('/posts/first_or_create', [PostsController::class, 'firstOrCreate']);
+Route::get('/posts/update_or_create', [PostsController::class, 'updateOrCreate']);
 
 Route::get('/features', [FeaturesController::class, 'index']);
 
