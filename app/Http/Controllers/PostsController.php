@@ -39,4 +39,16 @@ class PostsController extends Controller
             Post::create($post);
         }
     }
+
+    public function update() {
+        $updatedPost = [
+            'title' => 'new title of the post',
+            'content' => 'updated post content',
+            'image' => 'someimage.jpg',
+            'likes' => '77',
+            'is_published' => '1',
+        ];
+
+        Post::where('id', 1)->update($updatedPost);
+    }
 }
