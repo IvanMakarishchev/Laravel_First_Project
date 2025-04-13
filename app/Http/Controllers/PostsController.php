@@ -8,12 +8,11 @@ use Laravel\Pail\ValueObjects\Origin\Console;
 
 class PostsController extends Controller
 {
-    public function index() {
-        $post = Post::find(1);
-        dump($post->title);
-        dump($post->content);
-        dump($post->image);
-        dump($post->likes);
-        dump($post->is_published);
+    public function index()
+    {
+        $posts = Post::where('is_published', 1);
+        foreach ($posts as $post) {
+            dump($post->title);
+        }
     }
 }
