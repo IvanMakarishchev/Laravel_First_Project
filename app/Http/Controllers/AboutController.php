@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\About;
 use Illuminate\Http\Request;
 
 class AboutController extends Controller
 {
     public function index() {
-        return "This is About Page";
+        $about = About::find(1);
+        dump($about->title);
+        dump($about->content);
+        dump($about->image);
+        dump($about->is_published);
     }
 }
