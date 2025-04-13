@@ -15,4 +15,28 @@ class PostsController extends Controller
             dump($post->title);
         }
     }
+
+    public function create()
+    {
+        $postsArray = [
+            [
+                'title' => 'title of the post',
+                'content' => 'new post content',
+                'image' => 'someimage.jpg',
+                'likes' => '15',
+                'is_published' => '1',
+            ],
+            [
+                'title' => 'title of the another post',
+                'content' => 'another post content',
+                'image' => 'onemoreimage.jpg',
+                'likes' => '23',
+                'is_published' => '1',
+            ]
+        ];
+
+        foreach ($postsArray as $post) {
+            Post::create($post);
+        }
+    }
 }
