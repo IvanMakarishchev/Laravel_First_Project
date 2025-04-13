@@ -88,19 +88,31 @@ class PostsController extends Controller
             "likes" => 34,
             "is_published" => 1
         ];
+
         $post = Post::firstOrCreate(["title" => $somePost["title"]], $somePost);
+        
         $post->wasRecentlyCreated ? dump("post was created") : dump("post already exists");
     }
 
     public function updateOrCreate() {
         $somePost = [
-            "title" => "new title of the post",
-            "content" => "some new content",
+            "title" => "new 1000% awesome title of the post",
+            "content" => "some 1000% new content",
             "image" => "someimage.jpg",
             "likes" => 34,
             "is_published" => 0
         ];
+
         $post = Post::updateOrCreate(["title" => $somePost["title"]], $somePost);
-        count($post->getChanges()) > 0 ? dump("post updated") : dump("post wasn't updated");
+
+        if ($post->wasRecentlyCreated) {
+            dump("post created");
+        }
+        elseif ($post->wasChanged()) {
+            dump("post updated");
+        }
+        else {
+            dump("no changes detected");
+        }
     }
 }
