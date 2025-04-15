@@ -9,6 +9,11 @@
     <div>
         {{ $post->image }}
     </div>
+    <a href="{{ route('post.edit', $post->id) }}">
+        <button class="btn btn-primary">
+            Edit
+        </button>
+    </a>
     <a href="{{ route('post.index') }}">
         <button class="btn btn-primary">
             Back

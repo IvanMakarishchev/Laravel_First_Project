@@ -15,15 +15,16 @@ class PostsController extends Controller
     }
 
     public function create()
-    {        
+    {
         return view("post.create");
     }
 
-    public function store(Request $data) {
+    public function store(Request $data)
+    {
         $data = $data->validate([
-            "title"=> "string",
-            "content"=> "string",
-            "image"=> "string",
+            "title" => "string",
+            "content" => "string",
+            "image" => "string",
         ]);
 
         Post::create([
@@ -35,34 +36,33 @@ class PostsController extends Controller
         return redirect()->route("post.index");
     }
 
-    public function show(Post $post) {
+    public function show(Post $post)
+    {
         return view("post.show", compact("post"));
     }
 
-    public function update()
+    public function edit(Post $post)
     {
-        $updatedPost = [
-            "title" => "new title of the post",
-            "content" => "updated post content",
-            "image" => "someimage.jpg",
-            "likes" => 77,
-            "is_published" => 1,
-        ];
-
-        Post::where("id", 1)->update($updatedPost);
-
-        dump("post updated");
+        return view("post.edit", compact("post"));
     }
 
-    public function delete()
+    public function update(Post $post, Request $data)
     {
-        $post = Post::find(2);
-        if ($post) {
-            $post->delete();
-            dump("post deleted");
-        } else {
-            dump("post already deleted");
-        }
+        $data = $data->validate([
+            "title" => "string",
+            "content" => "string",
+            "image" => "string",
+        ]);
+
+        $post->update($data);
+
+        return redirect()->route("post.show", $post->id);
+    }
+
+    public function destroy(Post $post)
+    {
+        $post->delete();
+        return redirect()->route("post.index");
     }
 
     public function restore()

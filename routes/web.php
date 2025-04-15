@@ -19,6 +19,9 @@ Route::get('/posts/create', [PostsController::class, 'create'])->name('post.crea
 
 Route::post('/posts', [PostsController::class,'store'])->name('post.store');
 Route::get('/posts/{post}', [PostsController::class,'show'])->name('post.show');
+Route::get('/posts/{post}/edit', [PostsController::class,'edit'])->name('post.edit');
+Route::patch('/posts/{post}', [PostsController::class,'update'])->name('post.update');
+Route::delete('/posts/{post}', [PostsController::class,'destroy'])->name('post.delete');
 
 Route::get('/posts/update', [PostsController::class, 'update']);
 Route::get('/posts/delete', [PostsController::class, 'delete']);
