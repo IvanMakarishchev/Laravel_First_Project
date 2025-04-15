@@ -15,7 +15,10 @@ Route::get('/about', [AboutController::class, 'index'])->name('about.index');
 Route::get('/products', [ProductsController::class, 'index'])->name('product.index');
 
 Route::get('/posts', [PostsController::class, 'index'])->name('post.index');
-Route::get('/posts/create', [PostsController::class, 'create']);
+Route::get('/posts/create', [PostsController::class, 'create'])->name('post.create');
+
+Route::post('/posts', [PostsController::class,'store'])->name('post.store');
+
 Route::get('/posts/update', [PostsController::class, 'update']);
 Route::get('/posts/delete', [PostsController::class, 'delete']);
 Route::get('/posts/restore', [PostsController::class, 'restore']);

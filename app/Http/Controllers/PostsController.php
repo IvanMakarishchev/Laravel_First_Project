@@ -11,33 +11,28 @@ class PostsController extends Controller
     public function index()
     {
         $posts = Post::all();
-        return view("posts", compact("posts"));
+        return view("post.index", compact("posts"));
     }
 
     public function create()
-    {
-        $postsArray = [
-            [
-                "title" => "title of the post",
-                "content" => "new post content",
-                "image" => "someimage.jpg",
-                "likes" => 15,
-                "is_published" => 1,
-            ],
-            [
-                "title" => "title of the another post",
-                "content" => "another post content",
-                "image" => "onemoreimage.jpg",
-                "likes" => 23,
-                "is_published" => 1,
-            ]
-        ];
+    {        
+        return view("post.create");
+    }
 
-        foreach ($postsArray as $post) {
-            Post::create($post);
-        }
+    public function store(Request $data) {
+        $data = $data->validate([
+            "title"=> "string",
+            "content"=> "string",
+            "image"=> "string",
+        ]);
 
-        dump("posts created");
+        Post::create([
+            ...$data,
+            "likes" => "0",
+            "is_published" => "1"
+        ]);
+
+        return redirect()->route("post.index");
     }
 
     public function update()
@@ -88,11 +83,12 @@ class PostsController extends Controller
         ];
 
         $post = Post::firstOrCreate(["title" => $somePost["title"]], $somePost);
-        
+
         $post->wasRecentlyCreated ? dump("post was created") : dump("post already exists");
     }
 
-    public function updateOrCreate() {
+    public function updateOrCreate()
+    {
         $somePost = [
             "title" => "new 1000% awesome title of the post",
             "content" => "some 1000% new content",
@@ -105,11 +101,9 @@ class PostsController extends Controller
 
         if ($post->wasRecentlyCreated) {
             dump("post created");
-        }
-        elseif ($post->wasChanged()) {
+        } elseif ($post->wasChanged()) {
             dump("post updated");
-        }
-        else {
+        } else {
             dump("no changes detected");
         }
     }
