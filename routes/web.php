@@ -18,6 +18,7 @@ Route::get('/posts', [PostsController::class, 'index'])->name('post.index');
 Route::get('/posts/create', [PostsController::class, 'create'])->name('post.create');
 
 Route::post('/posts', [PostsController::class,'store'])->name('post.store');
+Route::get('/posts/{post}', [PostsController::class,'show'])->name('post.show');
 
 Route::get('/posts/update', [PostsController::class, 'update']);
 Route::get('/posts/delete', [PostsController::class, 'delete']);
