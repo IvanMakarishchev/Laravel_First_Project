@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Laravel\Pail\ValueObjects\Origin\Console;
 
@@ -10,7 +11,11 @@ class PostsController extends Controller
 {
     public function index()
     {
-        $posts = Post::all();
+        $category = Category::find(2);
+        $post = Post::find(1);
+        
+        $posts = $category->posts;
+
         return view("post.index", compact("posts"));
     }
 
