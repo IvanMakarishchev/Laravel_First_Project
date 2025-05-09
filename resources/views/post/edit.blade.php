@@ -15,6 +15,14 @@
             <label for="postImage" class="form-label">Image</label>
             <input type="text" class="form-control" id="postImage" value="{{ $post->image }}" name="image">
         </div>
+        <div class="mb-3">
+            <label for="postCategory" class="form-label">Category:</label>
+            <select class="form-select form-select-sm" id="postCategory" aria-label="categorySelect" name="category_id">
+                @foreach ($categories as $category)
+                    <option value="{{ $category->id }}" {{ $post->category_id == $category->id ? "selected" : "" }}>{{ $category->title }}</option>
+                @endforeach
+            </select>
+        </div>
         <button type="submit" class="btn btn-primary">Edit post</button>
     </form>
     <a href="{{ route("post.show", $post->id) }}">
